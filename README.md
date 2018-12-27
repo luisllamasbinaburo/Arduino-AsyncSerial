@@ -74,16 +74,16 @@ void Send(byte* data, size_t dataLength, bool waitAck = false);
 
 Otras funciones y métodos que configurar el comportamiento de AsyncSerial son
 ```c++
-void Start();	// Activa el AsyncSerial (si AutoReset == false)
-void Stop();	// Pone el AsyncSerial en IDDLE (si AutoReset == false)
-inline bool IsExpired();	// Devuelve True si AsyncSerial ha excedido el tiempo de Timeout
-unsigned long Timeout = 0;	// Establece el tiempo de Timeout. Fijar a 0 para desactivar Timeout
-bool AutoReset = true;		// Si es true, AsyncSerial se reiniciará tras recibir un mensaje válido
-bool AllowOverflow = false;	// Controla el comportamiento ante desbordamiento
+void Start();				// Activa el AsyncSerial (si AutoReset == false)
+void Stop();				// Pone el AsyncSerial en IDDLE (si AutoReset == false)
+inline bool IsExpired();		// Devuelve True si AsyncSerial ha excedido el tiempo de Timeout
+unsigned long Timeout = 0;		// Establece el tiempo de Timeout. Fijar a 0 para desactivar Timeout
+bool AutoReset = true;			// Si es true, AsyncSerial se reiniciará tras recibir un mensaje válido
+bool AllowOverflow = false;		// Controla el comportamiento ante desbordamiento
 bool SendAck;				// Controla el envío y recepción de ACK
 char FinishChar = CARRIAGE_RETURN;	// Caracter que finaliza el mensaje
-char IgnoreChar = NEW_LINE;			// Caracter ignorado durante la recepción
-char AckChar = ACK;					// Caracter de ACK enviado o recibido
+char IgnoreChar = NEW_LINE;		// Caracter ignorado durante la recepción
+char AckChar = ACK;			// Caracter de ACK enviado o recibido
 ```
 
 ## Ejemplos
@@ -98,7 +98,7 @@ byte data[dataLength];
 
 AsyncSerial asyncSerial(data, dataLength,
 	[](AsyncSerial& sender) { Serial.write(sender.GetContent(), asyncSerial.GetContentLength());
-							  Serial.println(); });
+				  Serial.println(); });
 
 void setup()
 {
@@ -211,9 +211,7 @@ void loop()
 
 	// Restart the AsyncSerial for example purposes
 	if ((unsigned long)(millis() - start > 10000))
-	{
 		Restart();
-	}
 
 }
 
