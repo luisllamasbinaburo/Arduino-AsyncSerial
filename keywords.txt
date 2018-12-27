@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map MyName
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+AsyncSerial	KEYWORD1
+AsyncSerialCallback	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+AsyncRecieve	KEYWORD2
+Recieve	KEYWORD2
+AsyncSend	KEYWORD2
+ProcessByte	KEYWORD2
+Send	KEYWORD2
+GetLastIndex	KEYWORD2
+GetLastData	KEYWORD2
+GetContent	KEYWORD2
+GetContentLength	KEYWORD2
+OrderBuffer	KEYWORD2
+Start	KEYWORD2
+Stop	KEYWORD2
+IsExpired	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
