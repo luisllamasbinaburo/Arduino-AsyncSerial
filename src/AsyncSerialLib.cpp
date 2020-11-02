@@ -10,7 +10,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 #include "AsyncSerialLib.h"
 
 AsyncSerial::AsyncSerial(byte* buffer, size_t bufferLength,
-	AsyncSerialCallback onRecievedOk, AsyncSerialCallback onTimeout = nullptr, AsyncSerialCallback onOverflow = nullptr)
+	AsyncSerialCallback onRecievedOk, AsyncSerialCallback onTimeout, AsyncSerialCallback onOverflow)
 {
 	Init(buffer, bufferLength, &Serial);
 	OnRecievedOk = onRecievedOk;
@@ -32,7 +32,7 @@ void AsyncSerial::Init(byte *buffer, size_t bufferLength, Stream* stream)
 
 AsyncSerial::Status AsyncSerial::AsyncRecieve()
 {
-	if (_status == IDDLE) { return; }
+	if (_status == IDDLE) { return _status; }
 
 	if (IsExpired())
 	{
@@ -312,28 +312,28 @@ void AsyncSerial::debugStatus()
 {
 	switch (_status)
 	{
-		IDDLE: _stream->println("IDDLE"); break;
-		RECIEVING_DATA: _stream->println("RECIEVING_DATA"); break;
-		RECIEVING_DATA_OVERFLOW: _stream->println("RECIEVING_DATA_OVERFLOW"); break;
-		MESSAGE_RECIEVED: _stream->println("MESSAGE_RECIEVED"); break;
-		MESSAGE_RECIEVED_OVERFLOW: _stream->println("MESSAGE_RECIEVED_OVERFLOW"); break;
-		TIMEOUT: _stream->println("TIMEOUT"); break;
-		WAITING_ACK: _stream->println("WAITING_ACK"); break;
-		MESSAGE_SENDED: _stream->println("	"); break;
+		case IDDLE: 				  	_stream->println("IDDLE"); 						break;
+		case RECIEVING_DATA: 		  	_stream->println("RECIEVING_DATA"); 			break;
+		case RECIEVING_DATA_OVERFLOW: 	_stream->println("RECIEVING_DATA_OVERFLOW"); 	break;
+		case MESSAGE_RECIEVED: 			_stream->println("MESSAGE_RECIEVED"); 			break;
+		case MESSAGE_RECIEVED_OVERFLOW: _stream->println("MESSAGE_RECIEVED_OVERFLOW"); 	break;
+		case TIMEOUT: 					_stream->println("TIMEOUT"); 					break;
+		case WAITING_ACK: 				_stream->println("WAITING_ACK"); 				break;
+		case MESSAGE_SENDED: 			_stream->println("	"); 						break;
 		default: break;
 	}
 }
 
 void AsyncSerial::debugBuffer()
 {
-	for (int i = 0; i < _bufferLength; i++)
+	for (size_t i = 0; i < _bufferLength; i++)
 	{
 		_stream->print((char)_buffer[i]);
 		_stream->print("\t");
 	}
 	_stream->println();
 
-	for (int i = 0; i < _bufferLength; i++)
+	for (size_t i = 0; i < _bufferLength; i++)
 		_stream->print(i == GetLastIndex() ? "^" : "\t");
 	_stream->println();
 }

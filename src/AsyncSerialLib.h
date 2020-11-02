@@ -18,7 +18,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 const char CARRIAGE_RETURN = '\r';
 const char NEW_LINE = '\n';
-const char ACK = '\0x06';
+const char ACK = 0x06;
 
 class AsyncSerial
 {
